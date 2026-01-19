@@ -64,6 +64,8 @@ const ProductFormPage = () => {
     return await storageApi.uploadImage(file, tempId)
   }
 
+  const [productSaved, setProductSaved] = useState(false)
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -102,15 +104,16 @@ const ProductFormPage = () => {
         savedProduct = await createProduct(productData)
         toast({
           title: '성공',
-          description: '상품이 등록되었습니다.',
+          description: '상품이 등록되었습니다. 링크를 추가할 수 있습니다.',
         })
         setSavedProductId(savedProduct.id)
+        setProductSaved(true)
       }
 
-      // 링크 관리가 가능하도록 상품 ID 저장
-      // 사용자가 링크를 추가할 수 있도록 폼을 유지하거나, 목록으로 이동
-      // 일단 목록으로 이동 (필요시 주석 처리)
-      navigate('/')
+      // 수정 모드일 때는 저장 후 목록으로 이동
+      if (isEdit) {
+        navigate('/')
+      }
     } catch (error) {
       console.error('Product save failed:', error)
       toast({
@@ -121,6 +124,10 @@ const ProductFormPage = () => {
     } finally {
       setSubmitting(false)
     }
+  }
+
+  const handleFinish = () => {
+    navigate('/')
   }
 
   if (isEdit && loading) {
@@ -214,10 +221,16 @@ const ProductFormPage = () => {
             <Button type="button" variant="outline" onClick={() => navigate('/')} disabled={submitting}>
               취소
             </Button>
-            <Button type="submit" disabled={submitting} className="flex-1">
-              {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {isEdit ? '수정하기' : '등록하기'}
-            </Button>
+            {productSaved && !isEdit ? (
+              <Button type="button" onClick={handleFinish} className="flex-1">
+                완료
+              </Button>
+            ) : (
+              <Button type="submit" disabled={submitting} className="flex-1">
+                {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {isEdit ? '수정하기' : '등록하기'}
+              </Button>
+            )}
           </div>
         </form>
       </div>

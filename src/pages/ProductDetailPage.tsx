@@ -5,6 +5,7 @@ import { useToast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { StatusBadge } from '@/components/StatusBadge'
 import { ImageDownloader } from '@/components/ImageDownloader'
 import { LinkManager } from '@/components/LinkManager'
@@ -15,13 +16,15 @@ import { ArrowLeft, Edit, Trash2, Copy } from 'lucide-react'
 import { Loader2, AlertCircle } from 'lucide-react'
 import { cn } from '@/utils/cn'
 import { productLinksApi, ProductLink } from '@/lib/api/productLinks'
+import { Product } from '@/lib/api/products'
 
 const ProductDetailPage = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const { toast } = useToast()
-  const { currentProduct, loading, error, fetchProduct, deleteProduct } = useProductStore()
+  const { currentProduct, loading, error, fetchProduct, deleteProduct, updateProduct } = useProductStore()
   const [productLinks, setProductLinks] = useState<ProductLink[]>([])
+  const [updatingStatus, setUpdatingStatus] = useState(false)
 
   useEffect(() => {
     if (id) {
@@ -60,6 +63,28 @@ const ProductDetailPage = () => {
         description: '상품 삭제에 실패했습니다.',
         variant: 'destructive',
       })
+    }
+  }
+
+  const handleStatusChange = async (newStatus: Product['status']) => {
+    if (!id || !currentProduct || updatingStatus) return
+
+    setUpdatingStatus(true)
+    try {
+      await updateProduct(id, { status: newStatus })
+      toast({
+        title: '성공',
+        description: '상태가 변경되었습니다.',
+      })
+    } catch (error) {
+      console.error('Failed to update status:', error)
+      toast({
+        title: '오류',
+        description: '상태 변경에 실패했습니다.',
+        variant: 'destructive',
+      })
+    } finally {
+      setUpdatingStatus(false)
     }
   }
 
@@ -200,8 +225,25 @@ const ProductDetailPage = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <p className="text-sm text-muted-foreground">상태</p>
-                <StatusBadge status={currentProduct.status} className="mt-1" />
+                <p className="text-sm text-muted-foreground mb-2">상태</p>
+                <Select
+                  value={currentProduct.status}
+                  onValueChange={(value) => handleStatusChange(value as Product['status'])}
+                  disabled={updatingStatus}
+                >
+                  <SelectTrigger className="w-full [&>span]:hidden">
+                    <StatusBadge status={currentProduct.status} />
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="IDEA">아이디어</SelectItem>
+                    <SelectItem value="SAMPLE_ORDERED">샘플 주문</SelectItem>
+                    <SelectItem value="SAMPLE_CONFIRMED">샘플 확인</SelectItem>
+                    <SelectItem value="ORDERED">주문 완료</SelectItem>
+                    <SelectItem value="SELLING">판매 중</SelectItem>
+                    <SelectItem value="DROP">중단</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               {currentProduct.tags && currentProduct.tags.length > 0 && (

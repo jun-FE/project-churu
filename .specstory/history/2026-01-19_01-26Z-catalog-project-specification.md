@@ -12455,3 +12455,1217 @@ _**Agent (model composer-1, mode Agent)**_
 
 ---
 
+
+오류가 아닙니다. 빌드가 진행 중입니다.
+
+현재 상태:
+- ✅ 패키지 설치 완료 (`yarn install`)
+- 🔄 TypeScript 컴파일 및 빌드 진행 중 (`tsc && vite build`)
+
+빌드는 보통 1–2분 걸립니다. 완료되면 배포 URL이 표시됩니다.
+
+빌드가 실패하거나 오래 걸리면, TypeScript 오류 가능성을 확인하겠습니다. 로컬에서 빌드를 테스트해보겠습니다.
+
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: yarn build</summary>
+
+```bash
+yarn build
+```
+
+```
+yarn run v1.22.22
+$ tsc &amp;&amp; vite build
+warning Skipping preferred cache folder "/Users/jun_fe/Library/Caches/Yarn" because it is not writable.
+warning Selected the next writable cache folder in the list, will be "/var/folders/99/8tnc2_tn7g59kltzqcpnx9mh0000gn/T/.yarn-cache-501".
+warning Cannot find a suitable global folder. Tried these: "/usr/local, /Users/jun_fe/.yarn"
+src/components/ProductCard.tsx(7,1): error TS6133: 'cn' is declared but its value is never read.
+src/lib/supabase.ts(3,33): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/lib/supabase.ts(4,37): error TS2339: Property 'env' does not exist on type 'ImportMeta'.
+src/pages/ProductDetailPage.tsx(14,41): error TS6133: 'ExternalLink' is declared but its value is never read.
+src/pages/ProductFormPage.tsx(95,9): error TS2322: Type 'void' is not assignable to type 'Product'.
+src/pages/ProductFormPage.tsx(102,9): error TS2322: Type 'void' is not assignable to type 'Product'.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+error Command failed with exit code 2.
+
+```
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+빌드 오류가 있습니다. TypeScript 오류를 수정 중입니다.
+
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/components/ProductCard.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/lib/supabase.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/pages/ProductFormPage.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/pages/ProductDetailPage.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: vite.config.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: tsconfig.json</summary>
+
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+TypeScript 오류 수정 중입니다.
+
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/components/ProductCard.tsx</summary>
+
+**Chunk 1**
+Lines added: undefined, lines removed: 1
+
+```diff
+@@ -5,5 +5,4 @@
+  import { formatCurrency } from '@/utils/formatter'
+  import { Product } from '@/lib/api/products'
+- import { cn } from '@/utils/cn'
+  
+  interface ProductCardProps {
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/pages/ProductDetailPage.tsx</summary>
+
+**Chunk 1**
+Lines added: 1, lines removed: 1
+
+```diff
+@@ -12,5 +12,5 @@
+  import { formatCurrency, formatCurrencyCNY, formatRelativeTime } from '@/utils/formatter'
+  import { formatForShippingAgent, copyToClipboard } from '@/utils/clipboard'
+- import { ArrowLeft, Edit, Trash2, Copy, ExternalLink } from 'lucide-react'
++ import { ArrowLeft, Edit, Trash2, Copy } from 'lucide-react'
+  import { Loader2, AlertCircle } from 'lucide-react'
+  import { cn } from '@/utils/cn'
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/stores/productStore.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="write">
+
+<details><summary>Tool use: **write** • Edit file: src/vite-env.d.ts</summary>
+
+**Chunk 1**
+Lines added: 12, lines removed: 1
+
+```diff
+@@ -1,1 +1,12 @@
+- 
++ /// &lt;reference types="vite/client" /&gt;
++ 
++ interface ImportMetaEnv {
++   readonly VITE_SUPABASE_URL: string
++   readonly VITE_SUPABASE_ANON_KEY: string
++   readonly VITE_SUPABASE_STORAGE_BUCKET: string
++ }
++ 
++ interface ImportMeta {
++   readonly env: ImportMetaEnv
++ }
++ 
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/stores/productStore.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="search" data-tool-name="grep">
+<details>
+<summary>Tool use: **grep** • Grep for "createProduct|updateProduct" in "src/stores/productStore.ts" • 6 matches</summary>
+
+Output mode: content
+
+
+| File | Content | Line |
+|------|------|------|
+| `src/stores/productStore.ts` | `createProduct: (product: Parameters<typeof productsApi.createProduct>[0]) => Promise<void>` | L11 |
+| `src/stores/productStore.ts` | `updateProduct: (id: string, product: Parameters<typeof productsApi.updateProduct>[1]) => Promise<void>` | L12 |
+| `src/stores/productStore.ts` | `createProduct: async (product) => \{` | L43 |
+| `src/stores/productStore.ts` | `const newProduct = await productsApi.createProduct(product)` | L46 |
+| `src/stores/productStore.ts` | `updateProduct: async (id: string, product) => \{` | L57 |
+| `src/stores/productStore.ts` | `const updatedProduct = await productsApi.updateProduct(id, product)` | L60 |
+
+
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+`productStore.ts`의 반환 타입 오류를 수정 중입니다.
+
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/stores/productStore.ts</summary>
+
+**Chunk 1**
+Lines added: 2, lines removed: 2
+
+```diff
+@@ -9,6 +9,6 @@
+    fetchProducts: () =&gt; Promise&lt;void&gt;
+    fetchProduct: (id: string) =&gt; Promise&lt;void&gt;
+-   createProduct: (product: Parameters&lt;typeof productsApi.createProduct&gt;[0]) =&gt; Promise&lt;void&gt;
+-   updateProduct: (id: string, product: Parameters&lt;typeof productsApi.updateProduct&gt;[1]) =&gt; Promise&lt;void&gt;
++   createProduct: (product: Parameters&lt;typeof productsApi.createProduct&gt;[0]) =&gt; Promise&lt;Product&gt;
++   updateProduct: (id: string, product: Parameters&lt;typeof productsApi.updateProduct&gt;[1]) =&gt; Promise&lt;Product&gt;
+    deleteProduct: (id: string) =&gt; Promise&lt;void&gt;
+    clearCurrentProduct: () =&gt; void
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/stores/productStore.ts</summary>
+
+**Chunk 1**
+Lines added: 1, lines removed: undefined
+
+```diff
+@@ -49,4 +49,5 @@
+          loading: false 
+        }))
++       return newProduct
+      } catch (error) {
+        set({ error: error instanceof Error ? error.message : 'Failed to create product', loading: false })
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/stores/productStore.ts</summary>
+
+**Chunk 1**
+Lines added: 1, lines removed: undefined
+
+```diff
+@@ -65,4 +65,5 @@
+          loading: false,
+        }))
++       return updatedProduct
+      } catch (error) {
+        set({ error: error instanceof Error ? error.message : 'Failed to update product', loading: false })
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="generic" data-tool-name="read_lints">
+<details>
+          <summary>Tool use: **read_lints** • Read lints for 1 file</summary>
+      
+Lint paths:
+
+- `src`
+
+Lint results
+
+
+**No lint errors found**
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: yarn build</summary>
+
+```bash
+yarn build
+```
+
+```
+yarn run v1.22.22
+$ tsc &amp;&amp; vite build
+vite v5.4.21 building for production...
+transforming...
+✓ 1734 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.52 kB │ gzip:   0.36 kB
+dist/assets/index-Ct-ds2Xu.css   25.82 kB │ gzip:   5.42 kB
+dist/assets/index-iZ4H1Xmf.js   509.97 kB │ gzip: 153.44 kB
+✓ built in 1.54s
+Done in 3.84s.
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+```
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+빌드 성공. 수정 사항을 GitHub에 푸시합니다.
+
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: git add . && git commit -m "Fix TypeScript build errors" && git push</summary>
+
+```bash
+git add . && git commit -m "Fix TypeScript build errors" && git push
+```
+
+```
+[main 89cbf5e] Fix TypeScript build errors
+ 6 files changed, 572 insertions(+), 4 deletions(-)
+ create mode 100644 VERCEL_DEPLOY_STEPS.md
+ create mode 100644 src/vite-env.d.ts
+To https://github.com/jun-FE/project-churu.git
+   a91433b..89cbf5e  main -&gt; main
+
+```
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+수정 완료 및 GitHub 푸시 완료.
+
+## 수정된 내용
+
+1. TypeScript 타입 오류 수정
+   - `vite-env.d.ts` 파일 추가 (환경 변수 타입 정의)
+   - `productStore.ts` 반환 타입 수정 (`Promise<void>` → `Promise<Product>`)
+   - 사용하지 않는 import 제거
+
+2. 빌드 성공 확인
+   - 로컬에서 빌드 테스트 완료
+
+3. GitHub에 푸시 완료
+   - Vercel에서 자동 재배포 시작
+
+## 다음 단계
+
+Vercel 대시보드에서:
+1. 배포 상태 확인 (자동 재배포 중)
+2. 환경 변수 설정 확인:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+   - `VITE_SUPABASE_STORAGE_BUCKET`
+3. 배포 완료 대기 (약 1-2분)
+
+배포가 완료되면 Vercel이 URL을 제공합니다. 그 URL을 모바일 브라우저에서 열면 사용할 수 있습니다.
+
+Vercel 대시보드에서 배포 상태를 확인해보세요.
+
+---
+
+_**User (2026-01-19 02:31Z)**_
+
+좋아 잘돌아간다 조금 수정할게 있는데 메인 리스트에서 볼수있는 정보가 너무 없어 위안화 원화 가격이랑 태그도 보여야 할거같아
+
+---
+
+_**Agent (model composer-1, mode Agent)**_
+
+
+
+---
+
+
+메인 리스트 카드에 위안화 원가와 원화 원가를 추가합니다.
+
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/components/ProductCard.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/utils/calculator.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/components/ProductCard.tsx</summary>
+
+**Chunk 1**
+Lines added: 2, lines removed: 1
+
+```diff
+@@ -3,5 +3,6 @@
+  import { StatusBadge } from './StatusBadge'
+  import { Badge } from '@/components/ui/badge'
+- import { formatCurrency } from '@/utils/formatter'
++ import { formatCurrency, formatCurrencyCNY } from '@/utils/formatter'
++ import { calculateCostKrw } from '@/utils/calculator'
+  import { Product } from '@/lib/api/products'
+  
+```
+
+**Chunk 2**
+Lines added: 9, lines removed: undefined
+
+```diff
+@@ -11,4 +12,13 @@
+  
+  export const ProductCard = ({ product }: ProductCardProps) =&gt; {
++   // 원화 원가 계산
++   const costKrw = product.cost_cny &amp;&amp; product.exchange_rate
++     ? calculateCostKrw(
++         product.cost_cny,
++         product.exchange_rate,
++         product.shipping_fee_krw || 0
++       )
++     : null
++ 
+    return (
+      &lt;Link to={&#96;/products/${product.id}&#96;} className="block"&gt;
+```
+
+**Chunk 3**
+Lines added: 22, lines removed: 5
+
+```diff
+@@ -56,9 +66,26 @@
+  
+            {/* 가격 정보 */}
+-           {product.selling_price_krw &amp;&amp; (
+-             &lt;div className="mb-2 text-lg font-bold text-primary"&gt;
+-               {formatCurrency(product.selling_price_krw)}
+-             &lt;/div&gt;
+-           )}
++           &lt;div className="mb-2 space-y-1"&gt;
++             {/* 위안화 원가 */}
++             {product.cost_cny &amp;&amp; (
++               &lt;div className="text-sm text-muted-foreground"&gt;
++                 원가: {formatCurrencyCNY(product.cost_cny)}
++               &lt;/div&gt;
++             )}
++ 
++             {/* 원화 원가 */}
++             {costKrw &amp;&amp; (
++               &lt;div className="text-sm font-medium"&gt;
++                 원화 원가: {formatCurrency(costKrw)}
++               &lt;/div&gt;
++             )}
++ 
++             {/* 판매 예정가 */}
++             {product.selling_price_krw &amp;&amp; (
++               &lt;div className="text-lg font-bold text-primary"&gt;
++                 판매가: {formatCurrency(product.selling_price_krw)}
++               &lt;/div&gt;
++             )}
++           &lt;/div&gt;
+  
+            {/* 태그 */}
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="generic" data-tool-name="read_lints">
+<details>
+          <summary>Tool use: **read_lints** • Read lints for 1 file</summary>
+      
+Lint paths:
+
+- `src/components/ProductCard.tsx`
+
+Lint results
+
+
+**No lint errors found**
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: git add src/components/ProductCard.tsx && git commit -m "Add cost information to product card" && git push</summary>
+
+```bash
+git add src/components/ProductCard.tsx && git commit -m "Add cost information to product card" && git push
+```
+
+```
+[main d899a08] Add cost information to product card
+ 1 file changed, 33 insertions(+), 6 deletions(-)
+To https://github.com/jun-FE/project-churu.git
+   89cbf5e..d899a08  main -&gt; main
+
+```
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+
+---
+
+_**User (2026-01-19 02:31Z)**_
+
+상태 태그에 컬러를 넣어서 구분되게 해놓고 싶어
+
+---
+
+_**Agent (model composer-1, mode Agent)**_
+
+
+
+---
+
+
+상태 배지에 색상을 적용해 구분되도록 수정 중입니다.
+
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/components/StatusBadge.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/components/StatusBadge.tsx</summary>
+
+**Chunk 1**
+Lines added: 42, lines removed: 7
+
+```diff
+@@ -9,11 +9,46 @@
+  }
+  
+- const statusConfig: Record&lt;ProductStatus, { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }&gt; = {
+-   IDEA: { label: '아이디어', variant: 'outline' },
+-   SAMPLE_ORDERED: { label: '샘플 주문', variant: 'secondary' },
+-   SAMPLE_CONFIRMED: { label: '샘플 확인', variant: 'secondary' },
+-   ORDERED: { label: '주문 완료', variant: 'default' },
+-   SELLING: { label: '판매 중', variant: 'default' },
+-   DROP: { label: '중단', variant: 'destructive' },
++ const statusConfig: Record&lt;ProductStatus, { 
++   label: string
++   bgColor: string
++   textColor: string
++   borderColor: string
++ }&gt; = {
++   IDEA: { 
++     label: '아이디어', 
++     bgColor: 'bg-gray-100',
++     textColor: 'text-gray-700',
++     borderColor: 'border-gray-300'
++   },
++   SAMPLE_ORDERED: { 
++     label: '샘플 주문', 
++     bgColor: 'bg-blue-100',
++     textColor: 'text-blue-700',
++     borderColor: 'border-blue-300'
++   },
++   SAMPLE_CONFIRMED: { 
++     label: '샘플 확인', 
++     bgColor: 'bg-purple-100',
++     textColor: 'text-purple-700',
++     borderColor: 'border-purple-300'
++   },
++   ORDERED: { 
++     label: '주문 완료', 
++     bgColor: 'bg-orange-100',
++     textColor: 'text-orange-700',
++     borderColor: 'border-orange-300'
++   },
++   SELLING: { 
++     label: '판매 중', 
++     bgColor: 'bg-green-100',
++     textColor: 'text-green-700',
++     borderColor: 'border-green-300'
++   },
++   DROP: { 
++     label: '중단', 
++     bgColor: 'bg-red-100',
++     textColor: 'text-red-700',
++     borderColor: 'border-red-300'
++   },
+  }
+  
+```
+
+**Chunk 2**
+Lines added: 10, lines removed: 1
+
+```diff
+@@ -22,5 +57,14 @@
+    
+    return (
+-     &lt;Badge variant={config.variant} className={cn('text-xs', className)}&gt;
++     &lt;Badge 
++       variant="outline"
++       className={cn(
++         'text-xs font-semibold border',
++         config.bgColor,
++         config.textColor,
++         config.borderColor,
++         className
++       )}
++     &gt;
+        {config.label}
+      &lt;/Badge&gt;
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="generic" data-tool-name="read_lints">
+<details>
+          <summary>Tool use: **read_lints** • Read lints for 1 file</summary>
+      
+Lint paths:
+
+- `src/components/StatusBadge.tsx`
+
+Lint results
+
+
+**No lint errors found**
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: git add src/components/StatusBadge.tsx && git commit -m "Add color coding to status badges" && git push</summary>
+
+```bash
+git add src/components/StatusBadge.tsx && git commit -m "Add color coding to status badges" && git push
+```
+
+```
+[main 2d56234] Add color coding to status badges
+ 1 file changed, 52 insertions(+), 8 deletions(-)
+To https://github.com/jun-FE/project-churu.git
+   d899a08..2d56234  main -&gt; main
+
+```
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+
+---
+
+
+상태 배지에 색상을 적용했습니다. 각 상태별 색상:
+
+- **IDEA (아이디어)**: 회색
+- **SAMPLE_ORDERED (샘플 주문)**: 파란색
+- **SAMPLE_CONFIRMED (샘플 확인)**: 보라색
+- **ORDERED (주문 완료)**: 주황색
+- **SELLING (판매 중)**: 초록색
+- **DROP (중단)**: 빨간색
+
+각 배지는 배경색, 텍스트 색상, 테두리 색상으로 구분됩니다. 변경사항을 커밋하고 푸시했습니다.
+
+---
+
+_**User (2026-01-19 02:31Z)**_
+
+1. 처음에 상품 등록할때 링크도 같이 등록할수 있으면 더 편할거같음
+2. 상태값 바꾸는거 수정페이지까지 들어가서 바꾸는게 좀 번거로움 상세페이지에서도 자유롭게 바꿀수 있었으면 좋겠음
+
+---
+
+_**Agent (model composer-1, mode Agent)**_
+
+
+
+---
+
+
+두 가지 개선사항 적용 중: 상품 등록 시 링크도 함께 등록 가능, 상세페이지에서 상태 바로 변경 가능.
+
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/pages/ProductFormPage.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/pages/ProductDetailPage.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/components/LinkManager.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+두 가지 개선사항 적용 중: 상품 등록 시 링크도 함께 등록 가능, 상세페이지에서 상태 바로 변경 가능.
+
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/stores/productStore.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="task" data-tool-name="todo_write">
+<details><summary>Tool use: **todo_write** • Todo List</summary>
+
+- [-] 상품 등록 시 링크도 함께 등록할 수 있도록 ProductFormPage 수정 (저장 후 폼 유지 및 LinkManager 활성화)
+- [ ] 상세페이지에서 상태값을 바로 변경할 수 있도록 StatusBadge를 Select로 변경
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/pages/ProductFormPage.tsx</summary>
+
+**Chunk 1**
+Lines added: 2, lines removed: undefined
+
+```diff
+@@ -64,4 +64,6 @@
+      return await storageApi.uploadImage(file, tempId)
+    }
++ 
++   const [productSaved, setProductSaved] = useState(false)
+  
+    const handleSubmit = async (e: React.FormEvent) =&gt; {
+```
+
+**Chunk 2**
+Lines added: 6, lines removed: 5
+
+```diff
+@@ -103,13 +105,14 @@
+          toast({
+            title: '성공',
+-           description: '상품이 등록되었습니다.',
++           description: '상품이 등록되었습니다. 링크를 추가할 수 있습니다.',
+          })
+          setSavedProductId(savedProduct.id)
++         setProductSaved(true)
+        }
+  
+-       // 링크 관리가 가능하도록 상품 ID 저장
+-       // 사용자가 링크를 추가할 수 있도록 폼을 유지하거나, 목록으로 이동
+-       // 일단 목록으로 이동 (필요시 주석 처리)
+-       navigate('/')
++       // 수정 모드일 때는 저장 후 목록으로 이동
++       if (isEdit) {
++         navigate('/')
++       }
+      } catch (error) {
+        console.error('Product save failed:', error)
+```
+
+**Chunk 3**
+Lines added: 4, lines removed: undefined
+
+```diff
+@@ -123,4 +126,8 @@
+      }
+    }
++ 
++   const handleFinish = () =&gt; {
++     navigate('/')
++   }
+  
+    if (isEdit &amp;&amp; loading) {
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/pages/ProductFormPage.tsx</summary>
+
+**Chunk 1**
+Lines added: 10, lines removed: 4
+
+```diff
+@@ -222,8 +222,14 @@
+                취소
+              &lt;/Button&gt;
+-             &lt;Button type="submit" disabled={submitting} className="flex-1"&gt;
+-               {submitting &amp;&amp; &lt;Loader2 className="mr-2 h-4 w-4 animate-spin" /&gt;}
+-               {isEdit ? '수정하기' : '등록하기'}
+-             &lt;/Button&gt;
++             {productSaved &amp;&amp; !isEdit ? (
++               &lt;Button type="button" onClick={handleFinish} className="flex-1"&gt;
++                 완료
++               &lt;/Button&gt;
++             ) : (
++               &lt;Button type="submit" disabled={submitting} className="flex-1"&gt;
++                 {submitting &amp;&amp; &lt;Loader2 className="mr-2 h-4 w-4 animate-spin" /&gt;}
++                 {isEdit ? '수정하기' : '등록하기'}
++               &lt;/Button&gt;
++             )}
+            &lt;/div&gt;
+          &lt;/form&gt;
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/pages/ProductDetailPage.tsx</summary>
+
+**Chunk 1**
+Lines added: 1, lines removed: undefined
+
+```diff
+@@ -6,4 +6,5 @@
+  import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+  import { Badge } from '@/components/ui/badge'
++ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+  import { StatusBadge } from '@/components/StatusBadge'
+  import { ImageDownloader } from '@/components/ImageDownloader'
+```
+
+**Chunk 2**
+Lines added: 1, lines removed: undefined
+
+```diff
+@@ -16,4 +17,5 @@
+  import { cn } from '@/utils/cn'
+  import { productLinksApi, ProductLink } from '@/lib/api/productLinks'
++ import { Product } from '@/lib/api/products'
+  
+  const ProductDetailPage = () =&gt; {
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/pages/ProductDetailPage.tsx</summary>
+
+**Chunk 1**
+Lines added: 2, lines removed: 1
+
+```diff
+@@ -23,6 +23,7 @@
+    const navigate = useNavigate()
+    const { toast } = useToast()
+-   const { currentProduct, loading, error, fetchProduct, deleteProduct } = useProductStore()
++   const { currentProduct, loading, error, fetchProduct, deleteProduct, updateProduct } = useProductStore()
+    const [productLinks, setProductLinks] = useState&lt;ProductLink[]&gt;([])
++   const [updatingStatus, setUpdatingStatus] = useState(false)
+  
+    useEffect(() =&gt; {
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/pages/ProductDetailPage.tsx</summary>
+
+**Chunk 1**
+Lines added: 22, lines removed: undefined
+
+```diff
+@@ -66,4 +66,26 @@
+      }
+    }
++ 
++   const handleStatusChange = async (newStatus: Product['status']) =&gt; {
++     if (!id || !currentProduct || updatingStatus) return
++ 
++     setUpdatingStatus(true)
++     try {
++       await updateProduct(id, { status: newStatus })
++       toast({
++         title: '성공',
++         description: '상태가 변경되었습니다.',
++       })
++     } catch (error) {
++       console.error('Failed to update status:', error)
++       toast({
++         title: '오류',
++         description: '상태 변경에 실패했습니다.',
++         variant: 'destructive',
++       })
++     } finally {
++       setUpdatingStatus(false)
++     }
++   }
+  
+    const handleCopyShippingAgent = async () =&gt; {
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/pages/ProductDetailPage.tsx</summary>
+
+**Chunk 1**
+Lines added: 32, lines removed: 2
+
+```diff
+@@ -226,6 +226,36 @@
+              &lt;CardContent className="space-y-4"&gt;
+                &lt;div&gt;
+-                 &lt;p className="text-sm text-muted-foreground"&gt;상태&lt;/p&gt;
+-                 &lt;StatusBadge status={currentProduct.status} className="mt-1" /&gt;
++                 &lt;p className="text-sm text-muted-foreground mb-2"&gt;상태&lt;/p&gt;
++                 &lt;Select
++                   value={currentProduct.status}
++                   onValueChange={(value) =&gt; handleStatusChange(value as Product['status'])}
++                   disabled={updatingStatus}
++                 &gt;
++                   &lt;SelectTrigger className="w-full"&gt;
++                     &lt;SelectValue&gt;
++                       &lt;StatusBadge status={currentProduct.status} /&gt;
++                     &lt;/SelectValue&gt;
++                   &lt;/SelectTrigger&gt;
++                   &lt;SelectContent&gt;
++                     &lt;SelectItem value="IDEA"&gt;
++                       &lt;StatusBadge status="IDEA" /&gt;
++                     &lt;/SelectItem&gt;
++                     &lt;SelectItem value="SAMPLE_ORDERED"&gt;
++                       &lt;StatusBadge status="SAMPLE_ORDERED" /&gt;
++                     &lt;/SelectItem&gt;
++                     &lt;SelectItem value="SAMPLE_CONFIRMED"&gt;
++                       &lt;StatusBadge status="SAMPLE_CONFIRMED" /&gt;
++                     &lt;/SelectItem&gt;
++                     &lt;SelectItem value="ORDERED"&gt;
++                       &lt;StatusBadge status="ORDERED" /&gt;
++                     &lt;/SelectItem&gt;
++                     &lt;SelectItem value="SELLING"&gt;
++                       &lt;StatusBadge status="SELLING" /&gt;
++                     &lt;/SelectItem&gt;
++                     &lt;SelectItem value="DROP"&gt;
++                       &lt;StatusBadge status="DROP" /&gt;
++                     &lt;/SelectItem&gt;
++                   &lt;/SelectContent&gt;
++                 &lt;/Select&gt;
+                &lt;/div&gt;
+  
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="generic" data-tool-name="read_lints">
+<details>
+          <summary>Tool use: **read_lints** • Read lints for 2 files</summary>
+      
+Lint paths:
+
+- `src/pages/ProductFormPage.tsx`
+- `src/pages/ProductDetailPage.tsx`
+
+Lint results
+
+
+**No lint errors found**
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+Select 컴포넌트의 StatusBadge 표시를 수정 중입니다.
+
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/pages/ProductDetailPage.tsx</summary>
+
+**Chunk 1**
+Lines added: 6, lines removed: 18
+
+```diff
+@@ -238,22 +238,10 @@
+                    &lt;/SelectTrigger&gt;
+                    &lt;SelectContent&gt;
+-                     &lt;SelectItem value="IDEA"&gt;
+-                       &lt;StatusBadge status="IDEA" /&gt;
+-                     &lt;/SelectItem&gt;
+-                     &lt;SelectItem value="SAMPLE_ORDERED"&gt;
+-                       &lt;StatusBadge status="SAMPLE_ORDERED" /&gt;
+-                     &lt;/SelectItem&gt;
+-                     &lt;SelectItem value="SAMPLE_CONFIRMED"&gt;
+-                       &lt;StatusBadge status="SAMPLE_CONFIRMED" /&gt;
+-                     &lt;/SelectItem&gt;
+-                     &lt;SelectItem value="ORDERED"&gt;
+-                       &lt;StatusBadge status="ORDERED" /&gt;
+-                     &lt;/SelectItem&gt;
+-                     &lt;SelectItem value="SELLING"&gt;
+-                       &lt;StatusBadge status="SELLING" /&gt;
+-                     &lt;/SelectItem&gt;
+-                     &lt;SelectItem value="DROP"&gt;
+-                       &lt;StatusBadge status="DROP" /&gt;
+-                     &lt;/SelectItem&gt;
++                     &lt;SelectItem value="IDEA"&gt;아이디어&lt;/SelectItem&gt;
++                     &lt;SelectItem value="SAMPLE_ORDERED"&gt;샘플 주문&lt;/SelectItem&gt;
++                     &lt;SelectItem value="SAMPLE_CONFIRMED"&gt;샘플 확인&lt;/SelectItem&gt;
++                     &lt;SelectItem value="ORDERED"&gt;주문 완료&lt;/SelectItem&gt;
++                     &lt;SelectItem value="SELLING"&gt;판매 중&lt;/SelectItem&gt;
++                     &lt;SelectItem value="DROP"&gt;중단&lt;/SelectItem&gt;
+                    &lt;/SelectContent&gt;
+                  &lt;/Select&gt;
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: src/components/ui/select.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+SelectValue 사용 방식을 수정해 StatusBadge가 올바르게 표시되도록 변경 중입니다.
+
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="search_replace">
+
+<details><summary>Tool use: **search_replace** • Edit file: src/pages/ProductDetailPage.tsx</summary>
+
+Status: **loading**
+
+```typescriptreact
+              <div>
+                <p className="text-sm text-muted-foreground mb-2">상태</p>
+                <Select
+                  value={currentProduct.status}
+                  onValueChange={(value) => handleStatusChange(value as Product['status'])}
+                  disabled={updatingStatus}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue asChild>
+                      <StatusBadge status={currentProduct.status} />
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="IDEA">아이디어</SelectItem>
+                    <SelectItem value="SAMPLE_ORDERED">샘플 주문</SelectItem>
+                    <SelectItem value="SAMPLE_CONFIRMED">샘플 확인</SelectItem>
+                    <SelectItem value="ORDERED">주문 완료</SelectItem>
+                    <SelectItem value="SELLING">판매 중</SelectItem>
+                    <SelectItem value="DROP">중단</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+```
+
+</details>
+
+</tool-use>
+
+---
+
+
+
+---
+
