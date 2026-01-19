@@ -4,7 +4,6 @@ import { StatusBadge } from './StatusBadge'
 import { Badge } from '@/components/ui/badge'
 import { formatCurrency } from '@/utils/formatter'
 import { Product } from '@/lib/api/products'
-import { cn } from '@/utils/cn'
 
 interface ProductCardProps {
   product: Product

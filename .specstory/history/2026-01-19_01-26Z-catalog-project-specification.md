@@ -11992,3 +11992,466 @@ GitHub 저장소가 준비되어 있나요? 준비되면 Vercel 배포를 진행
 
 ---
 
+_**User (2026-01-19 01:26Z)**_
+
+https://github.com/jun-FE/project-churu.git 
+레포 하나 파놨어 여기에 너가 업로드 잘해서 배포해봐
+
+---
+
+_**Agent (model composer-1, mode Agent)**_
+
+
+
+---
+
+
+GitHub 저장소에 코드를 푸시하고 Vercel에 배포하겠습니다.
+
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: git status</summary>
+
+```bash
+git status
+```
+
+```
+fatal: not a git repository (or any of the parent directories): .git
+
+```
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: git remote -v</summary>
+
+```bash
+git remote -v
+```
+
+```
+fatal: not a git repository (or any of the parent directories): .git
+
+```
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+Git 저장소 초기화 후 코드를 커밋하고 푸시합니다.
+
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: git init</summary>
+
+```bash
+git init
+```
+
+```
+error: could not write config file /Users/jun_fe/project-churu/.git/config: Operation not permitted
+fatal: could not set 'core.repositoryformatversion' to '0'
+
+```
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: git add .</summary>
+
+```bash
+git add .
+```
+
+```
+fatal: not a git repository (or any of the parent directories): .git
+
+```
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: git commit -m "Initial commit: Catalog product management app"</summary>
+
+```bash
+git commit -m "Initial commit: Catalog product management app"
+```
+
+```
+fatal: not a git repository (or any of the parent directories): .git
+
+```
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: git branch -M main</summary>
+
+```bash
+git branch -M main
+```
+
+```
+fatal: not a git repository (or any of the parent directories): .git
+
+```
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: git remote add origin https://github.com/jun-FE/project-churu.git</summary>
+
+```bash
+git remote add origin https://github.com/jun-FE/project-churu.git
+```
+
+```
+fatal: not a git repository (or any of the parent directories): .git
+
+```
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: git push -u origin main</summary>
+
+```bash
+git push -u origin main
+```
+
+```
+fatal: not a git repository (or any of the parent directories): .git
+
+```
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+권한 문제로 all 권한으로 재시도합니다.
+
+
+---
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
+<details><summary>Tool use: **run_terminal_cmd** • Run command: git init && git add . && git commit -m "Initial commit: Catalog product management app" && git branch -M main && git remote add origin https://github.com/jun-FE/project-churu.git && git push -u origin main</summary>
+
+```bash
+git init && git add . && git commit -m "Initial commit: Catalog product management app" && git branch -M main && git remote add origin https://github.com/jun-FE/project-churu.git && git push -u origin main
+```
+
+```
+Initialized empty Git repository in /Users/jun_fe/project-churu/.git/
+[main (root-commit) a91433b] Initial commit: Catalog product management app
+ 74 files changed, 19818 insertions(+)
+ create mode 100644 .cursorindexingignore
+ create mode 100644 .eslintrc.cjs
+ create mode 100644 .gitignore
+ create mode 100644 .specstory/.gitignore
+ create mode 100644 .specstory/history/2026-01-19_01-26Z-catalog-project-specification.md
+ create mode 100644 AUTH_SETUP.md
+ create mode 100644 CHECKLIST.md
+ create mode 100644 DEPLOYMENT.md
+ create mode 100644 DEVELOPMENT_AUTH.md
+ create mode 100644 FEATURE_STATUS.md
+ create mode 100644 NEXT_STEPS.md
+ create mode 100644 PROJECT_PLAN.md
+ create mode 100644 QUICK_DEPLOY.md
+ create mode 100644 README.md
+ create mode 100644 SETUP_STATUS.md
+ create mode 100644 STORAGE_FIX.md
+ create mode 100644 SUPABASE_SETUP.md
+ create mode 100644 components.json
+ create mode 100644 index.html
+ create mode 100644 package.json
+ create mode 100644 postcss.config.js
+ create mode 100644 src/App.tsx
+ create mode 100644 src/components/ImageDownloader.tsx
+ create mode 100644 src/components/ImageUploader.tsx
+ create mode 100644 src/components/LinkManager.tsx
+ create mode 100644 src/components/PriceCalculator.tsx
+ create mode 100644 src/components/ProductCard.tsx
+ create mode 100644 src/components/ProductList.tsx
+ create mode 100644 src/components/SearchBar.tsx
+ create mode 100644 src/components/StatusBadge.tsx
+ create mode 100644 src/components/StatusFilter.tsx
+ create mode 100644 src/components/TagInput.tsx
+ create mode 100644 src/components/ui/badge.tsx
+ create mode 100644 src/components/ui/button.tsx
+ create mode 100644 src/components/ui/card.tsx
+ create mode 100644 src/components/ui/dialog.tsx
+ create mode 100644 src/components/ui/input.tsx
+ create mode 100644 src/components/ui/label.tsx
+ create mode 100644 src/components/ui/select.tsx
+ create mode 100644 src/components/ui/textarea.tsx
+ create mode 100644 src/components/ui/toast.tsx
+ create mode 100644 src/components/ui/toaster.tsx
+ create mode 100644 src/components/ui/use-toast.ts
+ create mode 100644 src/index.css
+ create mode 100644 src/lib/api/productLinks.ts
+ create mode 100644 src/lib/api/products.ts
+ create mode 100644 src/lib/api/storage.ts
+ create mode 100644 src/lib/supabase.ts
+ create mode 100644 src/main.tsx
+ create mode 100644 src/pages/HomePage.tsx
+ create mode 100644 src/pages/ProductDetailPage.tsx
+ create mode 100644 src/pages/ProductFormPage.tsx
+ create mode 100644 src/stores/productStore.ts
+ create mode 100644 src/stores/uiStore.ts
+ create mode 100644 src/utils/calculator.ts
+ create mode 100644 src/utils/clipboard.ts
+ create mode 100644 src/utils/cn.ts
+ create mode 100644 src/utils/exchangeRate.ts
+ create mode 100644 src/utils/formatter.ts
+ create mode 100644 supabase/README.md
+ create mode 100644 supabase/dev-policies.sql
+ create mode 100644 supabase/find-api-keys.md
+ create mode 100644 supabase/fix-all-policies.sql
+ create mode 100644 supabase/fix-storage-policy.sql
+ create mode 100644 supabase/remove-foreign-key.sql
+ create mode 100644 supabase/schema.sql
+ create mode 100644 supabase/storage-policies-guide.md
+ create mode 100644 supabase/storage-policies.sql
+ create mode 100644 tailwind.config.js
+ create mode 100644 tsconfig.json
+ create mode 100644 tsconfig.node.json
+ create mode 100644 vercel.json
+ create mode 100644 vite.config.ts
+ create mode 100644 yarn.lock
+To https://github.com/jun-FE/project-churu.git
+ * [new branch]      main -&gt; main
+branch 'main' set up to track 'origin/main'.
+
+```
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+GitHub에 코드 푸시 완료. Vercel 배포를 진행합니다.
+
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="write">
+
+<details><summary>Tool use: **write** • Edit file: VERCEL_DEPLOY_STEPS.md</summary>
+
+**Chunk 1**
+Lines added: 94, lines removed: 1
+
+```diff
+@@ -1,1 +1,94 @@
+- 
++ # Vercel 배포 단계별 가이드
++ 
++ ## ✅ 1단계 완료: GitHub에 코드 푸시
++ 코드가 성공적으로 GitHub에 업로드되었습니다!
++ - 저장소: https://github.com/jun-FE/project-churu.git
++ 
++ ## 2단계: Vercel 배포
++ 
++ ### 방법 1: 웹 브라우저에서 (가장 쉬움)
++ 
++ 1. **Vercel 접속**
++    - https://vercel.com 접속
++    - GitHub 계정으로 로그인 (또는 회원가입)
++ 
++ 2. **프로젝트 Import**
++    - 대시보드에서 **"Add New Project"** 클릭
++    - **"Import Git Repository"** 섹션에서 &#96;jun-FE/project-churu&#96; 찾기
++    - **"Import"** 클릭
++ 
++ 3. **프로젝트 설정**
++    - **Framework Preset**: Vite (자동 감지됨)
++    - **Root Directory**: &#96;./&#96; (기본값)
++    - **Build Command**: &#96;yarn build&#96; (자동 설정됨)
++    - **Output Directory**: &#96;dist&#96; (자동 설정됨)
++    - **Install Command**: &#96;yarn install&#96; (자동 설정됨)
++ 
++ 4. **환경 변수 추가** (중요!)
++    - **Environment Variables** 섹션 클릭
++    - 다음 3개 변수 추가:
++    
++    &#96;&#96;&#96;
++    Name: VITE_SUPABASE_URL
++    Value: (Supabase 대시보드에서 복사한 URL)
++    
++    Name: VITE_SUPABASE_ANON_KEY
++    Value: (Supabase 대시보드에서 복사한 anon key)
++    
++    Name: VITE_SUPABASE_STORAGE_BUCKET
++    Value: product-images
++    &#96;&#96;&#96;
++ 
++ 5. **Deploy 클릭**
++    - 배포가 시작됩니다 (약 1-2분 소요)
++    - 완료되면 URL이 제공됩니다!
++ 
++ ### 방법 2: Vercel CLI 사용
++ 
++ &#96;&#96;&#96;bash
++ # Vercel CLI 설치
++ npm i -g vercel
++ 
++ # 로그인
++ vercel login
++ 
++ # 배포 (대화형)
++ vercel
++ 
++ # 프로덕션 배포
++ vercel --prod
++ &#96;&#96;&#96;
++ 
++ ## 3단계: 배포 완료 후
++ 
++ 배포가 완료되면:
++ - Vercel이 URL을 제공합니다: &#96;https://catalog-xxx.vercel.app&#96;
++ - 이 URL을 모바일 브라우저에서 열면 됩니다!
++ 
++ ## 4단계: 모바일에서 사용하기
++ 
++ 1. **모바일 브라우저에서 URL 열기**
++ 2. **홈 화면에 추가**:
++    - iOS: Safari → 공유 버튼 → 홈 화면에 추가
++    - Android: Chrome → 메뉴 → 홈 화면에 추가
++ 3. **앱처럼 사용 가능!**
++ 
++ ## 자동 배포 설정
++ 
++ GitHub에 코드를 push하면 자동으로 재배포됩니다:
++ &#96;&#96;&#96;bash
++ git add .
++ git commit -m "Update"
++ git push
++ &#96;&#96;&#96;
++ 
++ ## 문제 해결
++ 
++ ### 빌드 실패
++ - 환경 변수가 제대로 설정되었는지 확인
++ - Vercel 대시보드 → Deployments → 로그 확인
++ 
++ ### 이미지 업로드 안 됨
++ - Supabase Storage 정책 확인
++ - 환경 변수 확인
++ 
+```
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file">
+<details><summary>Tool use: **read_file** • Read file: vercel.json</summary>
+
+</details>
+</tool-use>
+
+---
+
+
+
+---
+
+
+GitHub에 코드 푸시 완료.
+
+## 다음 단계: Vercel 배포
+
+### 1. Vercel 접속 및 로그인
+1. https://vercel.com 접속
+2. GitHub 계정으로 로그인
+
+### 2. 프로젝트 Import
+1. 대시보드에서 "Add New Project" 클릭
+2. "Import Git Repository"에서 `jun-FE/project-churu` 선택
+3. "Import" 클릭
+
+### 3. 환경 변수 설정 (중요)
+"Environment Variables" 섹션에서 다음 3개 추가:
+
+```
+VITE_SUPABASE_URL = (Supabase에서 복사한 URL)
+VITE_SUPABASE_ANON_KEY = (Supabase에서 복사한 anon key)
+VITE_SUPABASE_STORAGE_BUCKET = product-images
+```
+
+### 4. Deploy 클릭
+- 배포 시작 (약 1-2분)
+- 완료되면 URL 제공 (예: `https://catalog-xxx.vercel.app`)
+
+## 배포 후
+
+배포된 URL을 모바일 브라우저에서 열면 사용할 수 있습니다.
+
+자세한 내용은 `VERCEL_DEPLOY_STEPS.md` 파일을 참고하세요.
+
+Vercel에서 배포를 진행하시면 됩니다. 문제가 있으면 알려주세요.
+
+---
+
+_**User (2026-01-19 01:26Z)**_
+
+12:20:56.854 Running build in Washington, D.C., USA (East) – iad1
+12:20:56.855 Build machine configuration: 2 cores, 8 GB
+12:20:56.982 Cloning github.com/jun-FE/project-churu (Branch: main, Commit: a91433b)
+12:20:56.982 Previous build caches not available.
+12:20:57.167 Cloning completed: 184.000ms
+12:20:57.585 Running "vercel build"
+12:20:58.505 Vercel CLI 50.4.4
+12:20:59.062 Running "install" command: `yarn install`...
+12:20:59.465 yarn install v1.22.19
+12:20:59.517 [1/4] Resolving packages...
+12:20:59.695 [2/4] Fetching packages...
+12:21:08.952 [3/4] Linking dependencies...
+12:21:10.849 [4/4] Building fresh packages...
+12:21:10.963 Done in 11.50s.
+12:21:11.252 yarn run v1.22.19
+12:21:11.280 $ tsc && vite build
+
+오류난거야?
+
+---
+
+_**Agent (model composer-1, mode Agent)**_
+
+
+
+---
+

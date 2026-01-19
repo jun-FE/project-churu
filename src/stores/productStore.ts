@@ -8,8 +8,8 @@ interface ProductState {
   error: string | null
   fetchProducts: () => Promise<void>
   fetchProduct: (id: string) => Promise<void>
-  createProduct: (product: Parameters<typeof productsApi.createProduct>[0]) => Promise<void>
-  updateProduct: (id: string, product: Parameters<typeof productsApi.updateProduct>[1]) => Promise<void>
+  createProduct: (product: Parameters<typeof productsApi.createProduct>[0]) => Promise<Product>
+  updateProduct: (id: string, product: Parameters<typeof productsApi.updateProduct>[1]) => Promise<Product>
   deleteProduct: (id: string) => Promise<void>
   clearCurrentProduct: () => void
 }
@@ -48,6 +48,7 @@ export const useProductStore = create<ProductState>((set) => ({
         products: [newProduct, ...state.products],
         loading: false 
       }))
+      return newProduct
     } catch (error) {
       set({ error: error instanceof Error ? error.message : 'Failed to create product', loading: false })
       throw error
@@ -63,6 +64,7 @@ export const useProductStore = create<ProductState>((set) => ({
         currentProduct: state.currentProduct?.id === id ? updatedProduct : state.currentProduct,
         loading: false,
       }))
+      return updatedProduct
     } catch (error) {
       set({ error: error instanceof Error ? error.message : 'Failed to update product', loading: false })
       throw error
