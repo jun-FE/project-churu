@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom'
 import { Card, CardContent } from '@/components/ui/card'
 import { StatusBadge } from './StatusBadge'
 import { Badge } from '@/components/ui/badge'
-import { formatCurrency } from '@/utils/formatter'
+import { formatCurrency, formatCurrencyCNY } from '@/utils/formatter'
+import { calculateCostKrw } from '@/utils/calculator'
 import { Product } from '@/lib/api/products'
 
 interface ProductCardProps {
@@ -10,6 +11,15 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  // 원화 원가 계산
+  const costKrw = product.cost_cny && product.exchange_rate
+    ? calculateCostKrw(
+        product.cost_cny,
+        product.exchange_rate,
+        product.shipping_fee_krw || 0
+      )
+    : null
+
   return (
     <Link to={`/products/${product.id}`} className="block">
       <Card className="overflow-hidden transition-all hover:shadow-md active:scale-[0.98]">
@@ -55,11 +65,28 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </h3>
 
           {/* 가격 정보 */}
-          {product.selling_price_krw && (
-            <div className="mb-2 text-lg font-bold text-primary">
-              {formatCurrency(product.selling_price_krw)}
-            </div>
-          )}
+          <div className="mb-2 space-y-1">
+            {/* 위안화 원가 */}
+            {product.cost_cny && (
+              <div className="text-sm text-muted-foreground">
+                원가: {formatCurrencyCNY(product.cost_cny)}
+              </div>
+            )}
+
+            {/* 원화 원가 */}
+            {costKrw && (
+              <div className="text-sm font-medium">
+                원화 원가: {formatCurrency(costKrw)}
+              </div>
+            )}
+
+            {/* 판매 예정가 */}
+            {product.selling_price_krw && (
+              <div className="text-lg font-bold text-primary">
+                판매가: {formatCurrency(product.selling_price_krw)}
+              </div>
+            )}
+          </div>
 
           {/* 태그 */}
           {product.tags && product.tags.length > 0 && (
